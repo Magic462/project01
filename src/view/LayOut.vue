@@ -1,5 +1,18 @@
 <script setup>
-import {ElContainer,ElHeader,ElMain,ElButton} from "element-plus"
+import { ElContainer,ElHeader,ElMain,ElButton } from "element-plus"
+import { ref,watch } from "vue"
+import { useRoute } from 'vue-router';
+const activePath = ref('');
+const route = useRoute(); 
+// 侦听路由变化  
+watch(  
+  () => route.path,  
+  (toPath) => {  
+    activePath.value=toPath;
+    console.log(activePath.value);
+  },  
+  { immediate: true } // 立即执行一次回调，以处理初始路由  
+);
 </script>
 
 <template>
@@ -11,16 +24,20 @@ import {ElContainer,ElHeader,ElMain,ElButton} from "element-plus"
   </div> -->
   <el-container>
       <el-header>
-        <el-tabs v-model="activeName" class="demo-tabs" @tab-click="handleClick">
-            <el-tab-pane label="User" name="first">
-                <router-link to="/MainPart">MainPart</router-link>
-            </el-tab-pane>
-            <el-tab-pane label="Config" name="second">
-                <router-link to="/UserPart">UserPart</router-link>
-            </el-tab-pane>
-            <el-tab-pane label="Role" name="third">Role</el-tab-pane>
-            <el-tab-pane label="Task" name="fourth">Task</el-tab-pane>
-        </el-tabs>
+  <el-menu
+    :default-active="activePath"
+    ellipsis
+    class="el-menu-vertical-demo"
+    mode="horizontal"
+    :popper-offset="16"
+    style="max-width: 600px"
+    router
+  >
+    <el-menu-item index="/MainPart">Processing Center</el-menu-item>
+    <el-menu-item index="/UserPart">Processing Center</el-menu-item>
+    <!-- <el-menu-item index="3">Processing Center</el-menu-item> -->
+    <!-- <el-menu-item index="4">Processing Center</el-menu-item> -->
+  </el-menu>
       </el-header>
       <el-container>
         <el-main><router-view></router-view></el-main>

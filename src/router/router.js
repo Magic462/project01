@@ -3,16 +3,20 @@ import { createRouter, createWebHistory } from 'vue-router';
 // import About from './views/About.vue'; // 假设你有 About.vue 组件
 
 const router = createRouter({
-  history: createWebHistory(),
+    history: createWebHistory(import.meta.env.BASE_URL),
   routes:[
     {
       path:'/',
       component: ()=>import('@/view/LayOut.vue'),
-    //   redirect:'/MainPart',
+      redirect:'/UserPart',
       children:[
         {
           path:'/UserPart',
           component: ()=>import('@/view/UserPart.vue')
+        },
+        {
+          path:'/MainPart',
+          component: ()=>import('@/view/MainPart.vue')
         },
         // {
         //   path:'/SettingPart',
