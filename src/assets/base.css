@@ -85,3 +85,6 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+li {
+  list-style: none;
+}
