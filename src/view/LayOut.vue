@@ -54,6 +54,9 @@ watch(
 </template>
 
 <style scoped>
+:deep(.el-container){
+  width: 100vw;
+}
 :deep(.el-header) {
     width: 100vw;
     height: 10vh;
