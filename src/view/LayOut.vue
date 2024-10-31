@@ -1,6 +1,8 @@
 <script setup>
 import { ElContainer,ElHeader,ElMain,ElButton } from "element-plus"
 import { ref,watch } from "vue"
+
+//路由跳转
 import { useRoute } from 'vue-router';
 const activePath = ref('');
 const route = useRoute(); 
@@ -13,6 +15,9 @@ watch(
   },  
   { immediate: true } // 立即执行一次回调，以处理初始路由  
 );
+
+//搜索框部分
+
 </script>
 
 <template>
@@ -27,10 +32,9 @@ watch(
       <span class="logo">我是logo</span>
         <el-menu
     :default-active="activePath"
-    ellipsis
+    :ellipsis="false"
     class="el-menu-vertical-demo"
     mode="horizontal"
-    :popper-offset="16"
     style="max-width: 600px"
     router
   >
@@ -43,7 +47,7 @@ watch(
         </el-menu>
         <div class="search">
           <input type="input" placeholder="大学智学网" class="search-content">
-          <div class="search-icon">搜索图标</div>
+          <div class="search-icon"><svg xmlns="http://www.w3.org/2000/svg" width="1.3em" height="1.3em" viewBox="0 0 24 24"><path fill="none" stroke="#333333" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m21 21l-4.343-4.343m0 0A8 8 0 1 0 5.343 5.343a8 8 0 0 0 11.314 11.314"/></svg></div>
         </div>
         <div class="user">用户</div>
       </el-header>
@@ -57,7 +61,8 @@ watch(
 :deep(.el-header) {
     width: 100vw;
     height: 10vh;
-    background-color: #555;
+    background-color: #fff;
+    /* background-color: #555; */
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -73,18 +78,29 @@ watch(
 }
 .search {
   position: relative;
+  border:1px solid #4662d9;
+  border-radius: 4px;
 }
 .search-content {
   width: 360px;
-  border-radius: 4px;
+  height: 100%;
+  border: none;
+  padding: 0;
+}
+.search input:hover {
+  border-color: #a7aab5;
+}
+.search input:focus {
+  border: none;
 }
 .search-icon {
   position: absolute;
-  top:0;
-  right:0;
+  top:3px;
+  right:3px;
 }
 .user {
   background-color: #fff;
   border-radius: 50%;
+  cursor: pointer;
 }
 </style>
