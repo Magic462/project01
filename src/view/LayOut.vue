@@ -17,7 +17,10 @@ watch(
 );
 
 //搜索框部分
-
+// const search = document.querySelector('.search-content')
+// search.addEventListener('input',e=>{
+//   search.classList.add('active')
+// })
 </script>
 
 <template>
@@ -90,11 +93,11 @@ watch(
   border: none;
   padding: 0;
 }
+.search-content .active {
+  border: none;
+}
 .search input:hover {
   border-color: #a7aab5;
-}
-.search input:focus {
-  border: none;
 }
 .search-icon {
   position: absolute;
