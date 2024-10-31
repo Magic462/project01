@@ -8,7 +8,7 @@ const router = createRouter({
     {
       path:'/',
       component: ()=>import('@/view/LayOut.vue'),
-      redirect:'/UserPart',
+      redirect:'/MainPart',
       children:[
         {
           path:'/UserPart',
@@ -18,22 +18,18 @@ const router = createRouter({
           path:'/MainPart',
           component: ()=>import('@/view/MainPart.vue')
         },
-        // {
-        //   path:'/SettingPart',
-        //   component: ()=>import('@/views/SettingPart.vue')
-        // },
-        // {
-        //   path:'/pages/notes/StudyNotes',
-        //   component: ()=>import('@/views/pages/notes/StudyNotes.vue')
-        // },
-        // {
-        //   path:'/pages/Algorithm/LeetCode',
-        //   component: ()=>import('@/views//pages/Algorithm/LeetCode.vue')
-        // },
-        // {
-        //   path:'/MainPart',
-        //   component: ()=>import('@/views/MainPart.vue')
-        // },
+        {
+          path:'/OneModule',
+          component: ()=>import('@/view/OneModule.vue')
+        },
+        {
+          path:'/TwoModule',
+          component: ()=>import('@/view/TwoModule.vue')
+        },
+        {
+          path:'/ThreeModule',
+          component: ()=>import('@/view/ThreeModule.vue')
+        },
       ]
     },
   ]
