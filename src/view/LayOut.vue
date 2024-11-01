@@ -159,7 +159,7 @@ const handleInput= e =>{
 
 .search {
   position: relative;
-  border:2px solid #ccced6;
+  border:1px solid #ccced6;
   width: 240px;
   border-radius: 4px;
 }
@@ -173,7 +173,7 @@ const handleInput= e =>{
 }
 
 .search.active {
-  border:2px solid #4662d9;
+  border:2px solid rgb(30,128,255);
   transition:ease .4s;
   width: 360px;
 }
