@@ -1,6 +1,6 @@
 <script setup>
 import { ElContainer,ElHeader,ElMain,ElButton } from "element-plus"
-import { ref,watch,computed } from "vue"
+import { ref,watch,computed,onMounted,onUnmounted } from "vue"
 
 //路由跳转
 import { useRoute } from 'vue-router';
@@ -64,6 +64,41 @@ const filteredItems = computed(() => {
 const handleInput= e =>{
   // listHidden.value = true;
 }
+
+//监听滚动条
+
+
+// Tabs标签页是否隐藏
+const isFixed = ref(true); 
+const handleScroll=()=>{
+  // 获取滚动条位置  
+  const scrollTop = document.documentElement.scrollTop
+  console.log(scrollTop);
+  if(scrollTop>=300){
+    isFixed.value=false
+  }else {
+    isFixed.value=true
+  }
+}
+//自定义防抖函数
+function debounce(func, delay) {
+  let timer;
+  return function (...args) {
+    clearTimeout(timer);
+    timer = setTimeout(() => {
+      func.apply(this, args);
+    }, delay);
+  };
+}
+// 使用防抖包装滚动处理函数
+const debouncedHandleScroll = debounce(handleScroll, 300);
+onMounted(()=>{
+  window.addEventListener('scroll',debouncedHandleScroll);
+})
+// 组件卸载时移除事件监听器  
+onUnmounted(() => {  
+  window.removeEventListener('scroll', debouncedHandleScroll);  
+});  
 </script>
 
 <template>
@@ -74,12 +109,13 @@ const handleInput= e =>{
     </el-container>
   </div> -->
   <el-container>
-      <el-header>
+      <el-header :class="{ fixed:isFixed }">
       <span class="logo"><img src="../assets/Logo.png" alt="大学智学网"></span>
         <el-menu
     :default-active="activePath"
     :ellipsis="false"
     class="el-menu-vertical-demo"
+    active-text-color="#1f2b6b"
     mode="horizontal"
     style="max-width: 600px"
     router
@@ -133,10 +169,22 @@ const handleInput= e =>{
     align-items: center;
     justify-content: space-between;
     padding:0 200px;
+    position: fixed;
+    top:0;
+    z-index:1000;
+    /* box-shadow: 0 2px 8px ; */
+    transition: transform .2s;
+    transform: translate3d(0, -100%, 0);
+}
+
+:deep(.el-header).fixed {
+  transform: translateZ(0);
+  /* transform: translate3d(0, -100%, 0); */
 }
 
 :deep(.el-main) {
     width: 100vw;
+    margin-top:10vh;
 }
 
 .logo {
@@ -159,7 +207,7 @@ const handleInput= e =>{
 
 .search {
   position: relative;
-  border:2px solid #ccced6;
+  border:1px solid #ccced6;
   width: 240px;
   border-radius: 4px;
 }
@@ -173,7 +221,7 @@ const handleInput= e =>{
 }
 
 .search.active {
-  border:2px solid #4662d9;
+  border:2px solid rgb(30,128,255);
   transition:ease .4s;
   width: 360px;
 }
@@ -212,7 +260,7 @@ const handleInput= e =>{
 
 .creat {
   border-radius: 4px;
-  background-color: #a1cc3d;
+  background-color: #2f9aad;
   flex-basis: 150px;
 }
 
