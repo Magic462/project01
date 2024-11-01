@@ -9,6 +9,7 @@ import ElementPlus from 'unplugin-element-plus/vite'
 import { createRequire } from 'module';
 const require = createRequire(import.meta.url);
 const sassEmbedded = require('sass-embedded');
+
 // https://vitejs.dev/config/
 export default defineConfig({
   // base:'/@view/',
